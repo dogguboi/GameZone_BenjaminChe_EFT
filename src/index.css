@@ -1,0 +1,611 @@
+/* ============================================================
+   index.css - GameZone React
+   Estilos propios que personalizan Bootstrap 5
+
+   Paleta de colores (maximo 5):
+   Morado oscuro  #2d1b4e  -> fondo de la pagina, navbar y footer
+   Violeta        #6c4ab6  -> bloques y bordes
+   Turquesa       #4ecdc4  -> bordes destacados, totales y enlaces
+   Rosa           #cc4b7d  -> botones y precios
+   Blanco calido  #f7f5fb  -> tarjetas y texto
+
+   Indice:
+   1. Variables y estilos generales
+   2. Tipografia
+   3. Barra de navegacion
+   4. Botones
+   5. Tarjetas de producto
+   6. Carrito
+   7. Pie de pagina
+   8. Ajustes responsivos
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   1. VARIABLES Y ESTILOS GENERALES
+   ------------------------------------------------------------ */
+
+:root {
+  --morado: #2d1b4e;
+  --violeta: #6c4ab6;
+  --cian: #4ecdc4;
+  --rosado: #cc4b7d;
+  --blanco: #f7f5fb;
+
+  /* Tamaño de la muesca de las esquinas (estilo pixelado) */
+  --muesca: 10px;
+  --muesca-chica: 5px;
+}
+
+body {
+  background-color: var(--morado);
+  color: var(--blanco);
+  /* Degradado muy sutil entre los dos morados de la paleta */
+  background-image: linear-gradient(180deg, #3a2460 0%, var(--morado) 420px);
+  background-repeat: no-repeat;
+}
+
+/* Ningun elemento lleva esquinas redondeadas */
+.card,
+.btn,
+.form-control,
+.alert,
+.badge,
+.list-group-item,
+.navbar-toggler {
+  border-radius: 0 !important;
+}
+
+
+/* ---------- ESQUINAS CON MUESCA (estilo pixelado) ----------
+   clip-path recorta un cuadradito en cada esquina del elemento, como si
+   al bloque le faltaran pixeles. El tamaño se controla con la variable --m.
+
+   Importante: clip-path tambien recorta los bordes CSS, por eso los
+   contornos se simulan con el color de fondo del contenedor mas un
+   relleno de 3px (ver .tarjeta-producto y .bloque-violeta). */
+
+/* Muesca en las cuatro esquinas */
+.esquinas-pixel {
+  clip-path: polygon(
+    var(--m) 0,
+    calc(100% - var(--m)) 0,
+    calc(100% - var(--m)) var(--m),
+    100% var(--m),
+    100% calc(100% - var(--m)),
+    calc(100% - var(--m)) calc(100% - var(--m)),
+    calc(100% - var(--m)) 100%,
+    var(--m) 100%,
+    var(--m) calc(100% - var(--m)),
+    0 calc(100% - var(--m)),
+    0 var(--m),
+    var(--m) var(--m)
+  );
+}
+
+/* Muesca solo en las dos esquinas de arriba (imagenes y encabezados) */
+.esquinas-pixel-arriba {
+  clip-path: polygon(
+    var(--m) 0,
+    calc(100% - var(--m)) 0,
+    calc(100% - var(--m)) var(--m),
+    100% var(--m),
+    100% 100%,
+    0 100%,
+    0 var(--m),
+    var(--m) var(--m)
+  );
+}
+
+/* Muesca solo en las dos esquinas de abajo (cuerpos de tarjeta) */
+.esquinas-pixel-abajo {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--m)),
+    calc(100% - var(--m)) calc(100% - var(--m)),
+    calc(100% - var(--m)) 100%,
+    var(--m) 100%,
+    var(--m) calc(100% - var(--m)),
+    0 calc(100% - var(--m))
+  );
+}
+
+/* Botones, campos y etiquetas: la misma muesca, en tamaño reducido */
+.btn,
+.form-control,
+.form-select,
+.navbar-toggler,
+.contador-carrito,
+.alert {
+  --m: var(--muesca-chica);
+  clip-path: polygon(
+    var(--m) 0,
+    calc(100% - var(--m)) 0,
+    calc(100% - var(--m)) var(--m),
+    100% var(--m),
+    100% calc(100% - var(--m)),
+    calc(100% - var(--m)) calc(100% - var(--m)),
+    calc(100% - var(--m)) 100%,
+    var(--m) 100%,
+    var(--m) calc(100% - var(--m)),
+    0 calc(100% - var(--m)),
+    0 var(--m),
+    var(--m) var(--m)
+  );
+}
+
+.badge,
+.plataforma,
+.btn-quitar {
+  --m: 3px;
+  clip-path: polygon(
+    var(--m) 0,
+    calc(100% - var(--m)) 0,
+    calc(100% - var(--m)) var(--m),
+    100% var(--m),
+    100% calc(100% - var(--m)),
+    calc(100% - var(--m)) calc(100% - var(--m)),
+    calc(100% - var(--m)) 100%,
+    var(--m) 100%,
+    var(--m) calc(100% - var(--m)),
+    0 calc(100% - var(--m)),
+    0 var(--m),
+    var(--m) var(--m)
+  );
+}
+
+/* Foco visible y coherente con la paleta (accesibilidad) */
+.btn:focus-visible,
+.form-control:focus {
+  outline: 2px solid var(--cian);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.form-control {
+  border: none;
+}
+
+
+/* ------------------------------------------------------------
+   2. TIPOGRAFIA
+   ------------------------------------------------------------ */
+
+h1, h2, h3 {
+  letter-spacing: -0.01em;
+}
+
+/* Titulo de seccion con una linea cian debajo */
+.titulo-seccion {
+  display: inline-block;
+  padding-bottom: 6px;
+  border-bottom: 3px solid var(--cian);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+/* Texto secundario: blanco con algo de transparencia para bajar el contraste */
+.texto-suave {
+  color: rgba(247, 245, 251, 0.72);
+  font-size: 0.9rem;
+}
+
+/* Colores propios reutilizables */
+.bg-morado  { background-color: var(--morado) !important; }
+.bg-cian    { background-color: var(--cian) !important; }
+.text-cian  { color: var(--cian) !important; }
+
+.link-cian {
+  color: var(--cian);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link-cian:hover {
+  color: var(--blanco);
+}
+
+
+/* ------------------------------------------------------------
+   3. BARRA DE NAVEGACION
+   ------------------------------------------------------------ */
+
+.navbar {
+  border-bottom: 3px solid var(--cian);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.navbar-brand {
+  letter-spacing: 0.04em;
+  font-size: 1.35rem;
+}
+
+/* El acento cian del logo */
+.navbar-brand span {
+  color: var(--cian);
+}
+
+/* Las categorias son botones, por eso se les quita el estilo por defecto */
+.navbar .nav-link {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-right: 0.35rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.95rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.navbar .nav-link:hover {
+  color: var(--blanco) !important;
+  border-bottom-color: var(--violeta);
+}
+
+/* Categoria seleccionada: subrayado cian */
+.nav-link.activo {
+  color: var(--cian) !important;
+  font-weight: 700;
+  border-bottom-color: var(--cian);
+}
+
+.navbar-toggler {
+  border: 2px solid var(--cian);
+  padding: 0.3rem 0.6rem;
+}
+
+/* Contador del carrito en la barra */
+.contador-carrito {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.75rem;
+  border: 2px solid var(--cian);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+
+/* ------------------------------------------------------------
+   4. BOTONES
+   ------------------------------------------------------------ */
+
+.btn {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn-rosado {
+  background-color: var(--rosado);
+  color: var(--blanco);
+  border: none;
+}
+
+.btn-rosado:hover {
+  background-color: var(--violeta);
+  color: var(--blanco);
+}
+
+/* Boton de un producto que ya esta en el carrito (renderizado condicional) */
+.btn-en-carrito {
+  font-size: 0.8rem;
+  white-space: nowrap;
+  background-color: var(--violeta);
+  color: var(--blanco);
+  border: none;
+}
+
+.btn-en-carrito:hover {
+  background-color: var(--morado);
+  color: var(--blanco);
+}
+
+/* Boton pequeño para quitar un producto del carrito */
+.btn-quitar {
+  background-color: var(--rosado);
+  color: var(--blanco);
+  border: none;
+  font-weight: 700;
+  line-height: 1;
+  padding: 1px 7px;
+  margin-left: 10px;
+  border-radius: var(--radio-chico);
+}
+
+.btn-quitar:hover {
+  background-color: var(--morado);
+  color: var(--blanco);
+}
+
+
+/* ------------------------------------------------------------
+   5. TARJETAS DE PRODUCTO
+   ------------------------------------------------------------ */
+
+/* El contorno violeta se logra con el fondo del contenedor y un relleno
+   de 3px, porque clip-path recortaria un borde CSS normal */
+.tarjeta-producto {
+  position: relative;
+  --m: var(--muesca);
+  background-color: var(--violeta);
+  border: none;
+  padding: 3px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.tarjeta-producto:hover {
+  background-color: var(--cian);
+  transform: translateY(-4px);
+}
+
+/* Todas las imagenes con la misma proporcion, sin deformarse */
+.tarjeta-producto .card-img-top {
+  --m: var(--muesca);   /* igual que la tarjeta: asi el contorno no se corta */
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-bottom: 3px;
+}
+
+/* El cuerpo blanco de la tarjeta */
+.tarjeta-producto .card-body {
+  --m: var(--muesca);
+  background-color: var(--blanco);
+}
+
+.tarjeta-producto .card-title {
+  color: var(--morado);
+  font-weight: 700;
+  line-height: 1.3;
+  min-height: 2.6em;   /* mantiene alineados los titulos de 1 y 2 lineas */
+}
+
+/* Descripcion breve del videojuego */
+.descripcion {
+  color: #5b5570;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+/* Boton para eliminar el videojuego del catalogo */
+.btn-eliminar-juego {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  line-height: 1;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--blanco);
+  background-color: var(--rosado);
+  border: none;
+  --m: 4px;
+}
+
+.btn-eliminar-juego:hover {
+  background-color: var(--morado);
+  color: var(--blanco);
+}
+
+/* Etiqueta de la plataforma */
+.plataforma {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid var(--violeta);
+  color: var(--violeta);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.precio {
+  color: var(--rosado);
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+
+
+/* ------------------------------------------------------------
+   6. CARRITO
+   ------------------------------------------------------------ */
+
+/* Mismo recurso que en las tarjetas: el contorno cian es el fondo */
+.bloque-violeta {
+  --m: var(--muesca);
+  background-color: var(--cian);
+  border: none;
+  padding: 3px;
+}
+
+.bloque-violeta .card-header {
+  --m: var(--muesca);
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+}
+
+/* El cuerpo del carrito, en violeta */
+.bloque-violeta .card-body {
+  --m: var(--muesca);
+  background-color: var(--violeta);
+}
+
+/* Filas del carrito */
+.bloque-violeta .list-group-item {
+  border: none;
+  border-bottom: 1px solid rgba(45, 27, 78, 0.12);
+  padding: 0.6rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.bloque-violeta .list-group-item:last-child {
+  border-bottom: none;
+}
+
+/* Mensaje de compra exitosa (aparece con renderizado condicional) */
+.aviso-compra {
+  --m: 6px;
+  background-color: var(--cian);
+  color: var(--morado);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  clip-path: polygon(
+    var(--m) 0,
+    calc(100% - var(--m)) 0,
+    calc(100% - var(--m)) var(--m),
+    100% var(--m),
+    100% calc(100% - var(--m)),
+    calc(100% - var(--m)) calc(100% - var(--m)),
+    calc(100% - var(--m)) 100%,
+    var(--m) 100%,
+    var(--m) calc(100% - var(--m)),
+    0 calc(100% - var(--m)),
+    0 var(--m),
+    var(--m) var(--m)
+  );
+}
+
+/* Linea separadora antes del total */
+.fila-total {
+  border-top: 2px solid var(--cian);
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+
+/* ------------------------------------------------------------
+   6b. FORMULARIOS (contacto y administracion)
+   ------------------------------------------------------------ */
+
+.formulario {
+  --m: var(--muesca);
+  background-color: var(--violeta);
+  padding: 1.5rem;
+}
+
+.formulario .form-label {
+  color: var(--blanco);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Campo con error: se marca con el color rosa de la paleta */
+.campo-error {
+  box-shadow: inset 0 0 0 2px var(--rosado);
+}
+
+.texto-error {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--morado);
+  background-color: var(--blanco);
+  display: inline-block;
+  padding: 2px 8px;
+}
+
+/* Aviso de operacion exitosa (formularios) */
+.aviso-exito {
+  --m: 6px;
+  background-color: var(--cian);
+  color: var(--morado);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.75rem;
+  clip-path: polygon(
+    var(--m) 0,
+    calc(100% - var(--m)) 0,
+    calc(100% - var(--m)) var(--m),
+    100% var(--m),
+    100% calc(100% - var(--m)),
+    calc(100% - var(--m)) calc(100% - var(--m)),
+    calc(100% - var(--m)) 100%,
+    var(--m) 100%,
+    var(--m) calc(100% - var(--m)),
+    0 calc(100% - var(--m)),
+    0 var(--m),
+    var(--m) var(--m)
+  );
+}
+
+/* Barra de filtros del catalogo */
+.barra-filtros .form-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.barra-filtros .form-select,
+.barra-filtros .form-control {
+  --m: var(--muesca-chica);
+}
+
+
+/* ------------------------------------------------------------
+   7. PIE DE PAGINA
+   ------------------------------------------------------------ */
+
+footer {
+  border-top: 3px solid var(--cian);
+  margin-top: 3rem;
+}
+
+footer h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+footer p,
+footer li {
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+
+/* ------------------------------------------------------------
+   8. AJUSTES RESPONSIVOS
+   ------------------------------------------------------------ */
+
+/* En escritorio el carrito acompaña el scroll */
+@media (min-width: 992px) {
+  .carrito-fijo {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+/* En movil el menu desplegado se ve mas ordenado */
+@media (max-width: 991px) {
+  .navbar .nav-link {
+    text-align: left;
+    border-bottom: none;
+    border-left: 3px solid transparent;
+    padding-left: 0.6rem;
+  }
+
+  .nav-link.activo {
+    border-bottom: none;
+    border-left-color: var(--cian);
+  }
+
+  .navbar form {
+    margin: 0.75rem 0;
+  }
+
+  .contador-carrito {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

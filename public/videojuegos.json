@@ -1,0 +1,78 @@
+{
+  "tienda": "GameZone",
+  "moneda": "CLP",
+  "videojuegos": [
+    {
+      "id": 1,
+      "nombre": "The Legend of Zelda",
+      "categoria": "juegos",
+      "plataforma": "Nintendo Switch",
+      "precio": 59990,
+      "descripcion": "Aventura de mundo abierto donde exploras el reino de Hyrule con total libertad. Incluye modo historia principal y misiones secundarias.",
+      "imagen": "img/zelda.png"
+    },
+    {
+      "id": 2,
+      "nombre": "God of War Ragnarok",
+      "categoria": "juegos",
+      "plataforma": "PlayStation 5",
+      "precio": 54990,
+      "descripcion": "Kratos y Atreus enfrentan el fin del mundo nordico en una aventura de accion cinematografica.",
+      "imagen": "img/godofwar.png"
+    },
+    {
+      "id": 3,
+      "nombre": "Forza Horizon 5",
+      "categoria": "juegos",
+      "plataforma": "Xbox Series X",
+      "precio": 44990,
+      "descripcion": "Carreras de mundo abierto ambientadas en Mexico, con mas de 500 vehiculos disponibles.",
+      "imagen": "img/forza.png"
+    },
+    {
+      "id": 4,
+      "nombre": "Minecraft",
+      "categoria": "juegos",
+      "plataforma": "PC",
+      "precio": 24990,
+      "descripcion": "Construye, explora y sobrevive en un mundo infinito hecho de bloques. Incluye multijugador online.",
+      "imagen": "img/minecraft.png"
+    },
+    {
+      "id": 5,
+      "nombre": "Super Mario Wonder",
+      "categoria": "juegos",
+      "plataforma": "Nintendo Switch",
+      "precio": 54990,
+      "descripcion": "Plataformas clasico renovado con efectos sorpresa en cada nivel. Ideal para jugar en familia.",
+      "imagen": "img/mario.png"
+    },
+    {
+      "id": 6,
+      "nombre": "FIFA 26",
+      "categoria": "juegos",
+      "plataforma": "PlayStation 5",
+      "precio": 64990,
+      "descripcion": "Simulador de futbol con licencias oficiales, modo carrera y competencias online.",
+      "imagen": "img/fifa.png"
+    },
+    {
+      "id": 7,
+      "nombre": "PlayStation 5",
+      "categoria": "consolas",
+      "plataforma": "Consola 1 TB",
+      "precio": 549990,
+      "descripcion": "Consola de nueva generacion con unidad de disco, SSD ultrarapido y control DualSense incluido.",
+      "imagen": "img/ps5.png"
+    },
+    {
+      "id": 8,
+      "nombre": "Control DualSense",
+      "categoria": "accesorios",
+      "plataforma": "PlayStation 5",
+      "precio": 69990,
+      "descripcion": "Control inalambrico con retroalimentacion haptica y gatillos adaptativos.",
+      "imagen": "img/control.png"
+    }
+  ]
+}
